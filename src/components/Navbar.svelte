@@ -2,7 +2,7 @@
 	import Avatar from './Avatar.svelte';
 </script>
 
-<nav class="fixed top-0 w-screen bg-white text-blac flex items-center justify-between px-10">
+<nav class="fixed top-0 w-screen bg-transparent text-blac flex items-center justify-between px-10">
 	<header class="font-bold text-2xl">Serenity</header>
 	<ul class="flex gap-4">
 		<li>

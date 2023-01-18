@@ -31,7 +31,12 @@
 
 		<div class="flex w-full h-full justify-between">
 			<div class="w-1/3 h-1/3 max-w-6xl">
-				<img id="irritated" src="images/irritated.webp" alt="Irritated person" />
+				<img
+					id="irritated"
+					src="images/irritated.webp"
+					alt="Irritated person"
+					class="rounded-full"
+				/>
 			</div>
 
 			<div id="section1_desc" class="flex flex-col justify-center gap-10">

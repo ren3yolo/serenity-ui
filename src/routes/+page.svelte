@@ -15,8 +15,8 @@
 
 		//call api and get images
 		try {
-			// const response = await axios.get(`https://dolle.onrender.com/generate/?prompt=${search}`);
-			const response = await axios.get(`http://localhost:3000/generate?prompt=${search}`);
+			const response = await axios.get(`https://dolle.onrender.com/generate/?prompt=${search}`);
+			// const response = await axios.get(`http://localhost:3000/generate?prompt=${search}`);
 
 			loading = false;
 			if (response.status === 200) {

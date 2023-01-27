@@ -3,15 +3,15 @@
 	export let altText: string = '';
 </script>
 
-<div id="image_block" class="relative flex flex-col gap-2 group">
+<div id="image_block" class="relative flex flex-col gap-2 group hover:scale-95 duration-300">
 	<img
 		src={`data:image/png;base64, ${payload}`}
 		alt={altText}
-		class="w-64 h-64 hover:cursor-pointer duration-200 relative peer"
+		class="w-64 h-64 hover:cursor-pointer duration-200 relative"
 	/>
 
 	<button
-		class="absolute h-16 w-64 z-10 bottom-0 bg-black text-white opacity-0 flex justify-center items-center group-hover:opacity-100 duration-300 backdrop-blur-lg bg-opacity-50"
+		class="relative h-14 w-64 bg-black text-white flex justify-center items-center border-2 border-black group-hover:bg-white group-hover:text-black font-light"
 	>
 		SHARE
 	</button>

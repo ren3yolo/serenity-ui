@@ -1,17 +1,29 @@
 <script lang="ts">
 	import axios from 'axios';
+	import { onMount, tick } from 'svelte';
+	import Image from '../components/Image.svelte';
 
 	let search: string = '',
-		searchTriggered: boolean = false,
+		searchTriggeredOnce: boolean = false,
 		imageUrls: Array<{ b64_json: string }> = [],
 		loading: boolean = false;
 
-	let loaded = !loading && imageUrls.length > 0;
+	function createObservers() {
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('show');
+				}
+			});
+		});
+
+		const images = document.querySelectorAll('.search_result');
+		images.forEach((image) => observer.observe(image));
+	}
 
 	async function generateImages(e: Event) {
 		e.preventDefault();
 		loading = true;
-		searchTriggered = true;
 
 		//call api and get images
 		try {
@@ -20,7 +32,10 @@
 
 			loading = false;
 			if (response.status === 200) {
+				searchTriggeredOnce = true;
 				imageUrls = response.data.message;
+				await tick();
+				createObservers();
 			} else {
 				alert('Something went wrong');
 			}
@@ -30,23 +45,30 @@
 	}
 </script>
 
-<main class="p-20 h-screen z-0">
+<main class="pt-20 px-20 z-0">
 	<section
 		id="homepage_prompt"
-		class={`h-full w-full relative top-20 ${
-			loaded ? '-translate-y-1/4' : ''
+		class={`h-full w-full relative top-1/3 ${
+			searchTriggeredOnce ? '-translate-y-1/4' : ''
 		} transition-all duration-500`}
 	>
 		<div class="w-full flex flex-col">
 			<label for="image_search_text" class="text-slate-700">
-				Start with a detailed description
+				{#if searchTriggeredOnce}
+					Edit the description with some detail
+				{:else}
+					Start with a detailed description
+				{/if}
 			</label>
 			<div id="input_group" class={`w-full h-8 flex border-slate-100 drop-shadow-md mt-2 `}>
-				<form on:submit={(e) => generateImages(e)} class="flex w-full">
+				<form
+					on:submit={(e) => generateImages(e)}
+					class="flex xs:flex-col xs:gap-2 sm:flex-row sm:gap-0 w-full"
+				>
 					<input
 						type="text"
 						id="image_search_text"
-						class="w-3/4 outline-none p-6 focus:drop-shadow-md peer duration-300 rounded-l-md"
+						class="sm:w-3/4 outline-none p-6 focus:drop-shadow-md peer duration-300 rounded-l-md"
 						placeholder="A cat riding a bike"
 						bind:value={search}
 					/>
@@ -55,7 +77,7 @@
 						disabled={loading}
 						class={`${
 							search.length > 0 ? 'bg-black text-white' : 'bg-slate-100'
-						} text-center p-6 flex items-center peer-focus:drop-shadow-md duration-300 rounded-r-md`}
+						} xs:w-full sm:w-32 flex justify-center p-6 items-center peer-focus:drop-shadow-md duration-300 rounded-r-md`}
 					>
 						{#if loading}
 							<span>
@@ -80,26 +102,22 @@
 									/>
 								</svg>
 							</span>
+						{:else}
+							Generate
 						{/if}
-						Generate</button
-					>
+					</button>
 				</form>
 			</div>
 		</div>
 
 		{#if !loading && imageUrls.length > 0}
-			<div
-				id="generated_images"
-				class="flex xs:flex-col gap-4 mt-14 transition-opacity delay-700 duration-1000"
-			>
+			<div id="generated_images" class="flex xs:flex-col xs:mt-32 gap-4 sm:mt-14">
 				<h1 class="text-md text-slate-700">Here&apos;s an image of {search}</h1>
-				<div class="mt-2 flex xs:flex-col sm:flex-row gap-4 flex-wrap overflow-scroll">
+				<div class="mt-2 flex xs:flex-col sm:flex-row gap-4 flex-wrap overflow-scroll mb-40">
 					{#each imageUrls as imageUrl}
-						<img
-							src={`data:image/png;base64, ${imageUrl.b64_json}`}
-							alt={search}
-							class="w-64 h-64 hover:scale-95 hover:cursor-pointer duration-200"
-						/>
+						<div class="search_result">
+							<Image payload={imageUrl.b64_json} altText={search} />
+						</div>
 					{/each}
 				</div>
 			</div>
@@ -108,4 +126,30 @@
 </main>
 
 <style>
+	main {
+		height: calc(100vh - 10rem);
+	}
+
+	.search_result {
+		opacity: 0;
+		transform: translateX(-100%);
+		transition: all 1s;
+	}
+
+	.search_result:nth-child(2) {
+		transition-delay: 200ms;
+	}
+
+	.search_result:nth-child(3) {
+		transition-delay: 400ms;
+	}
+
+	.search_result:nth-child(4) {
+		transition-delay: 600ms;
+	}
+
+	.show {
+		opacity: 1;
+		transform: translateX(0);
+	}
 </style>

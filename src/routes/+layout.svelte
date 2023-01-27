@@ -27,7 +27,7 @@
 
 <div id="container" class="h-screen w-screen relative">
 	<nav
-		class="absolute border-b-2 border-slate-200 top-0 h-20 px-10 w-screen bg-white flex justify-between items-center"
+		class="z-10 fixed border-b-2 border-slate-200 top-0 h-20 px-10 w-screen bg-white flex justify-between items-center"
 	>
 		<div id="brand" class={`font-semibold ${mobileView ? 'order-2' : 'order-1'}`}>DALL-E</div>
 		{#if mobileView}
@@ -64,7 +64,7 @@
 				</span>
 				<div
 					id="nav-menu-overlay"
-					class={`z-10 bg-black text-white text-xl pt-10 w-screen h-screen flex flex-col absolute top-20 transition-all duration-700 ${
+					class={`z-20 bg-black text-white text-xl pt-10 w-screen h-screen flex flex-col fixed top-20 transition-all duration-700 ${
 						menuOpen ? 'left-0' : '-left-full'
 					}`}
 				>
@@ -84,4 +84,10 @@
 		<div class="order-3" />
 	</nav>
 	<slot />
+
+	<footer
+		class="fixed bottom-0 h-20 bg-white border-t-2 border-slate-200 flex justify-center items-center w-full"
+	>
+		Copyright© DALL-E 2023 All Rights Reserved
+	</footer>
 </div>

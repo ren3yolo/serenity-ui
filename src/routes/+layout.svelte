@@ -33,10 +33,7 @@
 		{#if mobileView}
 			<div>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<span
-					class="hover:cursor-pointer transition-all duration-1000"
-					on:click={() => toggleMenuOnSmallDisplay()}
-				>
+				<span class="hover:cursor-pointer" on:click={() => toggleMenuOnSmallDisplay()}>
 					{#if menuOpen}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +64,7 @@
 				</span>
 				<div
 					id="nav-menu-overlay"
-					class={`z-1 text-xl pt-10 w-screen h-screen flex flex-col absolute top-20 transition-all duration-600 ${
+					class={`z-10 bg-black text-white text-xl pt-10 w-screen h-screen flex flex-col absolute top-20 transition-all duration-700 ${
 						menuOpen ? 'left-0' : '-left-full'
 					}`}
 				>

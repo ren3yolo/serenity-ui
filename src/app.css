@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-	font-family: 'Livvic';
-	font-style: normal;
-	font-weight: 400;
-	src: url('/fonts/Livvic/Livvic-Light.ttf');
+body {
+	background: #fafafa;
 }

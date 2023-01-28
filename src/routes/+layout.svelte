@@ -24,11 +24,11 @@
 	}
 </script>
 
-<title> DALL-E </title>
+<title> PEEKS.AI </title>
 
-<div id="container" class="h-screen w-screen relative">
+<div id="container" class="h-screen w-screen relative overflow-x-hidden">
 	<nav
-		class="z-10 fixed border-b-2 border-slate-200 top-0 h-20 px-10 w-screen bg-white flex justify-between items-center"
+		class="z-10 fixed border-slate-200 top-0 h-20 px-10 w-screen bg-white flex justify-between items-center"
 	>
 		<div id="brand" class={`font-semibold ${mobileView ? 'order-2' : 'order-1'}`}>
 			<a class="p-4" href="/">PEEKS.AI</a>
@@ -92,8 +92,14 @@
 	{/if}
 
 	<footer
-		class="sm:fixed bottom-0 h-20 bg-black text-white border-t-2 flex justify-center items-center w-full"
+		class="fixed bottom-0 h-20 bg-black text-white border-t-2 flex justify-center items-center w-full"
 	>
 		PEEKS.AI Copyright© 2023 All Rights Reserved
 	</footer>
 </div>
+
+<style>
+	nav {
+		background: #fafafa;
+	}
+</style>

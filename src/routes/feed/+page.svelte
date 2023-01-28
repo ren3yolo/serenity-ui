@@ -4,9 +4,9 @@
 </script>
 
 <section id="posts" class="w-full flex flex-col items-center p-20 pt-32">
-	<h1 class="text-3xl text-slate-600 font-light">Shared by the community</h1>
+	<h1 class="text-xl text-slate-900 font-semibold">Shared by the Community</h1>
 
-	<div class="mt-10 flex flex-wrap gap-8">
+	<div class="mt-10 flex flex-wrap gap-8 xs:justify-center sm:justify-start">
 		{#each data.posts as post}
 			<div
 				id="uploaded_image"

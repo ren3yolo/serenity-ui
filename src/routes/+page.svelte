@@ -45,7 +45,7 @@
 	}
 </script>
 
-<main class="pt-20 px-20 z-0">
+<main class="pt-20 px-20 z-10">
 	<section
 		id="homepage_prompt"
 		class={`h-full w-full relative top-1/3 ${
@@ -53,7 +53,7 @@
 		} transition-all duration-500`}
 	>
 		<div class="w-full flex flex-col">
-			<label for="image_search_text" class="text-slate-700">
+			<label for="image_search_text" class="text-slate-900 font-light">
 				{#if searchTriggeredOnce}
 					Edit the description with some detail
 				{:else}
@@ -77,7 +77,7 @@
 						disabled={loading}
 						class={`${
 							search.length > 0 ? 'bg-black text-white' : 'bg-slate-100'
-						} xs:w-full sm:w-32 flex justify-center p-6 items-center peer-focus:drop-shadow-md duration-300 rounded-r-md`}
+						} xs:w-full sm:w-32 flex justify-center p-6 items-center peer-focus:drop-shadow-md duration-300 rounded-r-md font-normal`}
 					>
 						{#if loading}
 							<span>
@@ -128,7 +128,18 @@
 
 <style>
 	main {
-		height: calc(100vh - 10rem);
+		height: calc(100vh - 5rem);
+	}
+
+	main::before {
+		content: '';
+		position: absolute;
+		top: 10vh;
+		right: -40px;
+		height: 300px;
+		width: 300px;
+		border-radius: 100%;
+		background-color: #9ed5c5;
 	}
 
 	.search_result {

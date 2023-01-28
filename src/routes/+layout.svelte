@@ -2,6 +2,7 @@
 	import '../app.css';
 
 	import { onMount } from 'svelte';
+	import { navigating } from '$app/stores';
 
 	let mobileView: boolean,
 		menuOpen = false;
@@ -29,7 +30,9 @@
 	<nav
 		class="z-10 fixed border-b-2 border-slate-200 top-0 h-20 px-10 w-screen bg-white flex justify-between items-center"
 	>
-		<div id="brand" class={`font-semibold ${mobileView ? 'order-2' : 'order-1'}`}>DALL-E</div>
+		<div id="brand" class={`font-semibold ${mobileView ? 'order-2' : 'order-1'}`}>
+			<a class="p-4" href="/">PEEKS.AI</a>
+		</div>
 		{#if mobileView}
 			<div>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -68,26 +71,29 @@
 						menuOpen ? 'left-0' : '-left-full'
 					}`}
 				>
-					<a class="hover:bg-slate-100 hover:text-black p-4" href="/history">History</a>
-					<a class="hover:bg-slate-100 hover:text-black p-4" href="/account">My Account</a>
-					<a class="hover:bg-slate-100 hover:text-black p-4" href="/about">About</a>
+					<a class="hover:bg-slate-100 hover:text-black p-4" href="/feed">MY FEED</a>
 				</div>
 			</div>
 		{:else}
 			<div id="nav-links" class={`${mobileView ? 'order-1' : 'order-2'} flex gap-4`}>
-				<a href="/history">History</a>
-				<a href="/account">My Account</a>
-				<a href="/about">About</a>
+				<a href="/feed">FEED</a>
 			</div>
 		{/if}
 
 		<div class="order-3" />
 	</nav>
-	<slot />
+	{#if $navigating}
+		<div class="p-40 h-full bg-black text-white flex flex-col gap-8 justify-center items-center">
+			<span class="h-20 w-20 rounded-full animate-spin border-t-2" />
+			<span class="text-xl">Getting a few things ready for you</span>
+		</div>
+	{:else}
+		<slot />
+	{/if}
 
 	<footer
-		class="fixed bottom-0 h-20 bg-white border-t-2 border-slate-200 flex justify-center items-center w-full"
+		class="sm:fixed bottom-0 h-20 bg-black text-white border-t-2 flex justify-center items-center w-full"
 	>
-		Copyright© DALL-E 2023 All Rights Reserved
+		PEEKS.AI Copyright© 2023 All Rights Reserved
 	</footer>
 </div>

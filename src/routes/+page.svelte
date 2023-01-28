@@ -1,6 +1,6 @@
 <script lang="ts">
 	import axios from 'axios';
-	import { onMount, tick } from 'svelte';
+	import { tick } from 'svelte';
 	import Image from '../components/Image.svelte';
 
 	let search: string = '',
@@ -113,7 +113,7 @@
 		{#if !loading && imageUrls.length > 0}
 			<div id="generated_images" class="flex xs:flex-col xs:mt-32 gap-4 sm:mt-14">
 				<div
-					class="mt-2 flex xs:flex-col xs:items-center sm:flex-row sm:justify-center gap-4 flex-wrap overflow-scroll mb-40"
+					class="mt-2 flex xs:flex-col xs:items-center sm:flex-row gap-4 flex-wrap overflow-scroll mb-40"
 				>
 					{#each imageUrls as imageUrl}
 						<div class="search_result">
